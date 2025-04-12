@@ -126,7 +126,7 @@ const authString = btoa (`${APP_ID}:${APP_SECRET}`);
 const birthdateFormatted = birthdate;
 //here we nest our Astronmy 
 //here we will prepare the request to fetch
-const testUrl = `https://api.astronomyapi.com/api/v2/bodies/positions?latitude=34.05&longitude=-118.24&from_date=2002-03-27&to_date=2015-03-27&bodies=moon`;
+const url = `https://api.astronomyapi.com/api/v2/bodies/positions?latitude=34.05&longitude=-118.24&from_date=2002-03-27&to_date=2015-03-27&bodies=moon`;
 fetch(url, {
   method: "GET",
   headers: {
