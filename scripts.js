@@ -126,13 +126,33 @@ const authString = btoa (`${APP_ID}:${APP_SECRET}`);
 const birthdateFormatted = birthdate;
 //here we nest our Astronmy 
 //here we will prepare the request to fetch
-const url = `https://api.astronomyapi.com/api/v2/bodies/positions?latitude=${lat}&longitude=${lng}&from_date=${birthdateFormatted}&to_date=${birthdateFormatted}&bodies=moon`;
+const url = "https://api.astronomyapi.com/api/v2/studio/moon-phase"; //url for moon api
+
+//this part is from api. astronomyapi.com papers
 fetch(url, {
-  method: "GET",
+  method: "POST",
   headers: {
     Authorization: `Basic ${authString}`,
     "Content-Type": "application/json"
-  }
+  },
+  body: JSON.stringify({
+    format: "png",
+    style: {
+      moonStyle: "shaded",
+      backgroundStyle: "stars",
+      backgroundColor: "black",
+      headingColor: "white",
+      textColor: "white"
+    },
+    observer: {
+      latitude: lat,
+      longitude: lng,
+      date: birthdateFormatted
+    },
+    view: {
+      type: "landscape-simple"
+    }
+  })
 })
 .then(response => response.json())
 .then(data => {
@@ -150,6 +170,7 @@ const user = {
 console.log(user);
     });
 }
+
 
 
 
