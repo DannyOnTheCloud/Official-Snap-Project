@@ -42,7 +42,6 @@ let titles = [
 // you should use more than just an array of strings to store it all.
 
 // This function adds cards the page to display the data in the array
-//I will use this to add cards o the page when user submits their own info 
 function showCards() {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
@@ -67,27 +66,6 @@ function showCards() {
     cardContainer.appendChild(nextCard); // Add new card to the container
   }
 }
-//Here is the function to add cards 
-function addUserCard(title, imageUrl, messageText) {
-  const cardContainer = document.getElementById("card-container");
-  const templateCard = document.querySelector(".card");
-  const newCard = templateCard.cloneNode(true);
-
-  newCard.style.display = "block";
-
-  const cardHeader = newCard.querySelector("h2");
-  cardHeader.textContent = title;
-
-  const cardImage = newCard.querySelector("img");
-  cardImage.src = imageUrl;
-  cardImage.alt = `${title} Poster`;
-
-  const cardMessage = newCard.querySelector("p");
-  cardMessage.textContent = messageText;
-
-  cardContainer.appendChild(newCard);
-}
-
 
 function editCardContent(card, newTitle, newImage) {
   card.style.display = "block";
@@ -105,6 +83,7 @@ function editCardContent(card, newTitle, newImage) {
   console.log("new card:", newTitle, "- html: ", card);
 }
 //this function is all the info of the user such as birth date and city
+
 function savebirthdate(){ 
 
   const birthdate = document.getElementById("birthdate").value; //this would store the users birthdate
@@ -132,64 +111,60 @@ function savebirthdate(){
       const Weather_API_Key = "e40e8c7f7be8a902adb1a95495456c41";
       const WeatherAPIUrl = `https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=${lat}&lon=${lng}&dt=${unixTime}&appid=${Weather_API_Key}&units=imperial`;
       fetch(WeatherAPIUrl)
-  .then(response => response.json())
-  .then(data => {
-    const weather = data.data[0]
-    const temperature = weather.temp;
-    const description = weather.weather[0].description;
-    console.log(`Weather on your birthday: ${description}, ${temperature}°F`);
-    //const weatherResult = document.getElementById("weather-result");
-   // weatherResult.innerText = `Weather on your birthday was: ${description}, ${temperature}°F`;
+      .then(response => response.json())
+      .then(data => {
+        const weather = data.data[0]
+        const temperature = weather.temp;
+        const description = weather.weather[0].description;
+        console.log(`Weather on your birthday: ${description}, ${temperature}°F`);
+        const weatherResult = document.getElementById("weather-result");
+        weatherResult.innerText = `Weather on your birthday was: ${description}, ${temperature}°F`;
+      });
+      const APP_ID = "1a407542-5735-469a-bc2b-2832dfc294e0";
+const APP_SECRET = "D2d333d7ae53e5fb1c269cbfdb69d3e496e49e5dc8c4cb8769b4e5c52ebd13d9476838fb3ed5f100bdc5dc58de332353b2022b09f78c865d1e971e6d1590318ba62be00e489ee3309b46a0f34f8907437d5bd433814405a0cf2f7927b7c54d627058de6abf24c0e07a40bda65a873c9d";
+const authString = btoa (`${APP_ID}:${APP_SECRET}`);
+const birthdateFormatted = birthdate;
+//here we nest our Astronmy 
+//here we will prepare the request to fetch
+const url = "https://api.astronomyapi.com/api/v2/studio/moon-phase"; //url for moon api
 
-    const APP_ID = "1a407542-5735-469a-bc2b-2832dfc294e0";
-    const APP_SECRET = "D2d333d7ae53e5fb1c269cbfdb69d3e496e49e5dc8c4cb8769b4e5c52ebd13d9476838fb3ed5f100bdc5dc58de332353b2022b09f78c865d1e971e6d1590318ba62be00e489ee3309b46a0f34f8907437d5bd433814405a0cf2f7927b7c54d627058de6abf24c0e07a40bda65a873c9d";
-    const authString = btoa(`${APP_ID}:${APP_SECRET}`);
-    const birthdateFormatted = birthdate;
+//this part is from api. astronomyapi.com papers
+fetch(url, {
+  method: "POST",
+  headers: {
+    Authorization: `Basic ${authString}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    format: "png",
+    style: {
+      moonStyle: "shaded",
+      backgroundStyle: "stars",
+      backgroundColor: "black",
+      headingColor: "white",
+      textColor: "white"
+    },
+    observer: {
+      latitude: lat,
+      longitude: lng,
+      date: birthdateFormatted
+    },
+    view: {
+      type: "landscape-simple"
+    }
+  })
+})
+.then(response => response.json())
+.then(data => {
+  console.log("Astronomy API response:", data);
+  const moonImage = document.getElementById("moon-phase");
+moonImage.src = data.data.imageUrl;
+moonImage.alt = "Moon Phase on your birthday";
 
-    const url = "https://api.astronomyapi.com/api/v2/studio/moon-phase";
-    fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${authString}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        format: "png",
-        style: {
-          moonStyle: "shaded",
-          backgroundStyle: "stars",
-          backgroundColor: "black",
-          headingColor: "white",
-          textColor: "white"
-        },
-        observer: {
-          latitude: lat,
-          longitude: lng,
-          date: birthdateFormatted
-        },
-        view: {
-          type: "landscape-simple"
-        }
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Astronomy API response:", data);
-
-      const moonImageUrl = data.data.imageUrl;
-
-      const userCard = {
-        title: "Your Birthday Snapshot",
-        imageUrl: moonImageUrl,
-        message: `Weather on your birthday: ${description}, ${temperature}°F`
-      };
-
-      addUserCard(userCard.title, userCard.imageUrl, userCard.message);
-    })
-    .catch(error => {
-      console.error("Error fetching astronomy data:", error);
-    });
-  });
+})
+.catch(error => {
+  console.error("Error fetching astronomy data:", error);
+});
 
 
 const user = {
