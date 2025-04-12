@@ -157,6 +157,10 @@ fetch(url, {
 .then(response => response.json())
 .then(data => {
   console.log("Astronomy API response:", data);
+  const moonImage = document.getElementById("moon-phase");
+moonImage.src = data.data.imageUrl;
+moonImage.alt = "Moon Phase on your birthday";
+
 })
 .catch(error => {
   console.error("Error fetching astronomy data:", error);
@@ -170,10 +174,6 @@ const user = {
 console.log(user);
     });
 }
-
-
-
-
 
 
 // This calls the addCards() function when the page is first loaded
