@@ -105,8 +105,9 @@ function editCardContent(card, newTitle, newImage) {
 }
 //this function is all the info of the user such as birth date and city
 function savebirthdate(){ 
+const cardContainer = document.getElementById("card-container");
   //clear default cards
-document.getElemenyById(cardContainer).innerHTML = "";
+cardContainer.innerHTML = "";
   //clear default cards
 
   const birthdate = document.getElementById("birthdate").value; //this would store the users birthdate
