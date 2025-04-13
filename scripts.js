@@ -68,12 +68,14 @@ function showCards() {
   }
 }
 //Here is the function to add cards 
-function addUserCard(title, imageUrl, messageText) {
+function addUserCard(title, imageUrl, messageText, backgroundColor) {
   const cardContainer = document.getElementById("card-container");
   const templateCard = document.querySelector(".card");
   const newCard = templateCard.cloneNode(true);
-
   newCard.style.display = "block";
+//Change users background 
+newCard.style.backgroundColor = backgroundColor;
+
 
   const cardHeader = newCard.querySelector("h2");
   cardHeader.textContent = title;
@@ -99,9 +101,6 @@ function editCardContent(card, newTitle, newImage) {
   cardImage.src = newImage;
   cardImage.alt = newTitle + " Poster";
 
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
   console.log("new card:", newTitle, "- html: ", card);
 }
 //this function is all the info of the user such as birth date and city
@@ -111,6 +110,10 @@ function savebirthdate(){
   const dateObj = new Date(birthdate); //this allows javascript to do math with birth date
   const unixTime = Math.floor(dateObj.getTime() / 1000); //got this online allows accurate unix time stamp return
   console.log("UNIX timestamp:", unixTime);
+
+  const username = document.getElementById("username").value;
+  const favoriteColor = document.getElementById("favoriteColor").value;
+
 
 //Converting Location City and State to Long and Lat
   const location = document.getElementById("location").value; //this would hold users city and state
@@ -137,7 +140,7 @@ function savebirthdate(){
     const weather = data.data[0]
     const temperature = weather.temp;
     const description = weather.weather[0].description;
-    console.log(`Weather on your birthday: ${description}, ${temperature}°F`);
+    //console.log(`Weather on your birthday: ${description}, ${temperature}°F`);
     //const weatherResult = document.getElementById("weather-result");
    // weatherResult.innerText = `Weather on your birthday was: ${description}, ${temperature}°F`;
 
@@ -179,12 +182,12 @@ function savebirthdate(){
       const moonImageUrl = data.data.imageUrl;
 
       const userCard = {
-        title: "Your Birthday Snapshot",
+        title: `${username}'s Birthday Snapshot`,
         imageUrl: moonImageUrl,
         message: `Weather on your birthday: ${description}, ${temperature}°F`
       };
 
-      addUserCard(userCard.title, userCard.imageUrl, userCard.message);
+      addUserCard(userCard.title, userCard.imageUrl, userCard.message, favoriteColor);
     })
     .catch(error => {
       console.error("Error fetching astronomy data:", error);
