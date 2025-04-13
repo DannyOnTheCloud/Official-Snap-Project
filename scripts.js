@@ -45,7 +45,7 @@ let titles = [
 //I will use this to add cards o the page when user submits their own info 
 function showCards() {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
+  document.getElementById("card-container").innerHTML = "";
   const templateCard = document.querySelector(".card");
 
   for (let i = 0; i < titles.length; i++) {
@@ -105,6 +105,9 @@ function editCardContent(card, newTitle, newImage) {
 }
 //this function is all the info of the user such as birth date and city
 function savebirthdate(){ 
+  //clear default cards
+document.getElemenyById(cardContainer).innerHTML = "";
+  //clear default cards
 
   const birthdate = document.getElementById("birthdate").value; //this would store the users birthdate
   const dateObj = new Date(birthdate); //this allows javascript to do math with birth date
