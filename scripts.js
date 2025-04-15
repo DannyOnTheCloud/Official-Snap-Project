@@ -38,6 +38,9 @@ let titles = [
   "Find your Birthdate's Moon Phase",
   "Find your Birthdate's Song of the Year",
 ];
+
+// Saving Users//
+let savedUsers = [];
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
 
@@ -107,7 +110,7 @@ function editCardContent(card, newTitle, newImage) {
 function savebirthdate(){ 
 const cardContainer = document.getElementById("card-container");
   //clear default cards
-cardContainer.innerHTML = "";
+//cardContainer.innerHTML = "";
   //clear default cards
 
   const birthdate = document.getElementById("birthdate").value; //this would store the users birthdate
@@ -192,6 +195,15 @@ cardContainer.innerHTML = "";
       };
 
       addUserCard(userCard.title, userCard.imageUrl, userCard.message, favoriteColor);
+      savedUsers.push({
+        name: username,
+        birthdate: birthdate,
+        location: location,
+        color: favoriteColor,
+        imageUrl: moonImageUrl,
+        message: `Weather on your birthday: ${description}, ${temperature}°F`
+      });
+      
     })
     .catch(error => {
       console.error("Error fetching astronomy data:", error);
