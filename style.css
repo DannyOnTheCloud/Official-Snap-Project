@@ -144,3 +144,76 @@ button:active {
   color: #49274A;
   margin-top: 10px;
 }
+body {
+  background: linear-gradient(to bottom, #fcefee, #fffaf6);
+}
+
+:root {
+  --yellow: #ffd300;
+  --blue: #17d3ff;
+  --pink: #ff4e91;
+}
+
+.icon {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 32px;
+  position: relative;
+}
+
+.confetti {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 16px;
+  top: 0;
+  opacity: 0;
+  background: var(--yellow);
+  animation: makeItRain 1s ease-out infinite;
+}
+
+.confetti-piece:nth-child(odd) {
+  background: var(--blue);
+}
+
+.confetti-piece:nth-child(even) {
+  z-index: 1;
+}
+
+.confetti-piece:nth-child(4n) {
+  width: 5px;
+  height: 12px;
+  animation-duration: 2s;
+}
+
+.confetti-piece:nth-child(3n) {
+  width: 3px;
+  height: 10px;
+  animation-duration: 2.5s;
+  animation-delay: 1s;
+}
+
+.confetti-piece:nth-child(4n-7) {
+  background: var(--pink);
+}
+
+@keyframes makeItRain {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px);
+  }
+}
