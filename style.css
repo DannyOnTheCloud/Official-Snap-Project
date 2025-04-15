@@ -137,3 +137,10 @@ button:active {
 .card.glow-effect {
   animation: glow 1s ease-in-out infinite;
 }
+.hero-subtitle {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #49274A;
+  margin-top: 10px;
+}
