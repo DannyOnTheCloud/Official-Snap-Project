@@ -209,13 +209,8 @@ const cardContainer = document.getElementById("card-container");
       console.error("Error fetching astronomy data:", error);
     });
   });
-  
-  function clearInputs() {
-    document.getElementById("username").value = "";
-    document.getElementById("birthdate").value = "";
-    document.getElementById("location").value = "";
-    document.getElementById("favoriteColor").value = "#000000"; // or any default color
-  }
+
+
   
 
 const user = {
@@ -246,4 +241,11 @@ function removeLastCard() {
 
 function restart() {
   window.location.reload()
+}
+
+function clearInputs() {
+  document.getElementById("username").value = "";
+  document.getElementById("birthdate").value = "";
+  document.getElementById("location").value = "";
+  document.getElementById("favoriteColor").value = "#000000"; // or any default color
 }
