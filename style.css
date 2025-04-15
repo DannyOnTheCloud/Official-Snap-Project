@@ -22,6 +22,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 20px;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -62,7 +63,6 @@ body {
   padding: 10px;
 }
 
-
 button {
   background-color: #F4DECB;
   border: 2px solid #49274A;
@@ -87,10 +87,53 @@ button:active {
   transform: scale(0.98);
 }
 
- 
-.result-box {     /* Customizes result box */
+.result-box {
   margin-top: 20px;
   font-size: 18px;
   color: #333;
   font-weight: bold;
+}
+
+.user-input-section {
+  background-color: #F4DECB;
+  border-top: 2px solid #49274A;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba(73, 39, 74, 0.3);
+}
+
+.user-input-section label {
+  font-family: "Verdana";
+  font-weight: bold;
+  margin-top: 10px;
+  color: #49274A;
+}
+
+.user-input-section input {
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #94618E;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #49274A;
+  background-color: #fff;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px #F4DECB, 0 0 20px #F4DECB, 0 0 30px #94618E;
+  }
+  50% {
+    box-shadow: 0 0 20px #F4DECB, 0 0 40px #F4DECB, 0 0 60px #94618E;
+  }
+  100% {
+    box-shadow: 0 0 10px #F4DECB, 0 0 20px #F4DECB, 0 0 30px #94618E;
+  }
+}
+
+.card.glow-effect {
+  animation: glow 1s ease-in-out infinite;
 }
