@@ -135,6 +135,56 @@ function savebirthdate(){
 
   const username = document.getElementById("username").value;
   const favoriteColor = document.getElementById("favoriteColor").value;
+  const luckyNumber = document.getElementById("luckyNumber").value;
+
+const birthdayFacts = [
+"The tradition of birthday cakes dates back to ancient Greece, where moon-shaped cakes were offered to Artemis.",
+
+"The song Happy Birthday to You is the most recognized song in the English language, according to the Guinness World Records.",
+
+"The song Happy Birthday to You was composed by two American sisters, Patty and Mildred Hill, in 1893.",
+
+"The first birthday cakes as we know them today appeared in Germany in the Middle Ages.",
+
+"In China, longevity noodles are eaten on birthdays to symbolize long life. The longer the noodle, the better!",
+
+"In Russia, instead of cake, birthday pies with greetings carved into the crust are common.",
+
+"In Jamaica, the birthday person is often covered in flour by friends and family as a playful tradition.",
+
+"The ancient Greeks adopted the Egyptian tradition and added their twist by offering moon-shaped cakes to Artemis, the goddess of the moon, with candles to represent the moonlight.",
+
+"The concept of birthday parties originated in Germany, where Kinderfeste was held for children with a cake adorned with candles.",
+
+"The world’s largest birthday cake was made in 1989 for the 100th birthday of Fort Payne, Alabama, weighing over 128,000 pounds.",  
+
+]
+
+const birthdayCake = [
+"Random Cake",
+
+"Black Forest Cake(German Classic)",
+
+"Confetti Birthday Cake",
+
+"Chocolate Cake",
+
+"Carrot Cake",
+
+"Ding Dong Cake",
+
+"Red Velvet Cake",
+]
+
+let factIndex = luckyNumber % birthdayFacts.length;
+let funFact = birthdayFacts[factIndex]
+console.log("Fun Birthday Fact:", funFact);
+let cakeIndex = luckyNumber % birthdayCake.length;
+let randomCake = birthdayCake[cakeIndex];
+console.log("Your Cake:", randomCake);
+
+
+
 
   //Converting Location City and State to Long and Lat
   const location = document.getElementById("location").value; //this would hold users city and state
@@ -208,7 +258,11 @@ function savebirthdate(){
             const userCard = {
               title: `${username}'s Birthday Snapshot`,
               imageUrl: moonImageUrl,
-              message: `Weather on your birthday: ${description}, ${temperature}°F`
+              message: `Weather on your birthday: ${description}, ${temperature}°F
+            
+             Fun Fact: ${funFact}
+            
+             Recommended Cake: ${randomCake}`
             };
 
             addUserCard(userCard.title, userCard.imageUrl, userCard.message, favoriteColor);
@@ -264,48 +318,3 @@ function clearInputs() {
   document.getElementById("location").value = "";
   document.getElementById("favoriteColor").value = "#000000"; // or any default color
 }
-const luckyNumber = document.getElementyById("luckynumber").value;
-
-const birthdayFacts = [
-"The tradition of birthday cakes dates back to ancient Greece, where moon-shaped cakes were offered to Artemis.",
-
-"The song Happy Birthday to You is the most recognized song in the English language, according to the Guinness World Records.",
-
-"The song Happy Birthday to You was composed by two American sisters, Patty and Mildred Hill, in 1893.",
-
-"The first birthday cakes as we know them today appeared in Germany in the Middle Ages.",
-
-"In China, longevity noodles are eaten on birthdays to symbolize long life. The longer the noodle, the better!",
-
-"In Russia, instead of cake, birthday pies with greetings carved into the crust are common.",
-
-"In Jamaica, the birthday person is often covered in flour by friends and family as a playful tradition.",
-
-"The ancient Greeks adopted the Egyptian tradition and added their twist by offering moon-shaped cakes to Artemis, the goddess of the moon, with candles to represent the moonlight.",
-
-"The concept of birthday parties originated in Germany, where Kinderfeste was held for children with a cake adorned with candles.",
-
-"The world’s largest birthday cake was made in 1989 for the 100th birthday of Fort Payne, Alabama, weighing over 128,000 pounds.",  
-
-]
-
-const birthdayCake = [
-"Random Cake",
-
-"Black Forest Cake(German Classic)",
-
-"Confetti Birthday Cake",
-
-"Chocolate Cake",
-
-"Carrot Cake",
-
-"Ding Dong Cake",
-
-"Red Velvet Cake",
-]
-
-let factIndex = luckyNumber % birthdayFacts.length;
-let funFact = birthdayFacts[factIndex]
-console.log("Fun Birthday Fact:", funFact);
-
