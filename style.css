@@ -217,3 +217,7 @@ body {
     transform: translateY(200px);
   }
 }
+.fun-card {
+  background-color: #fbeaff;
+  border: 2px dashed #94618E;
+}
