@@ -65,11 +65,19 @@ function showCards() {
     } else if (i == 2) {
       image = Song_Image;
     }
+    //
 
     const nextCard = templateCard.cloneNode(true); // Copy the template card
     editCardContent(nextCard, title, image); // Edit title and image
+    nextCard.classList.add("glow-effect"); // Add glow class
     cardContainer.appendChild(nextCard); // Add new card to the container
   }
+
+  // Remove glow after 5 seconds
+  setTimeout(() => {
+    const cards = document.querySelectorAll(".glow-effect");
+    cards.forEach(card => card.classList.remove("glow-effect"));
+  }, 5000);
 }
 
 //Here is the function to add cards 
